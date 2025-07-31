@@ -6,82 +6,79 @@
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ffe3ec, #ffd6e0);
+  background: radial-gradient(circle at top left, #ffdee9, #b5fffc);
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  overflow: hidden;
+  cursor: none;
 }
 
 .card {
-  background: white;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
   padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
   text-align: center;
   width: 90%;
-  max-width: 400px;
-  animation: popIn 1s ease;
+  max-width: 450px;
+  color: #fff;
+  animation: fadeIn 1s ease-in-out;
 }
 
-@keyframes popIn {
-  0% {
-    transform: scale(0.8);
+@keyframes fadeIn {
+  from {
+    transform: translateY(20px);
     opacity: 0;
   }
-  100% {
-    transform: scale(1);
+  to {
+    transform: translateY(0);
     opacity: 1;
   }
 }
 
 h1 {
-  font-size: 2rem;
-  color: #e91e63;
+  font-size: 2.5rem;
+  color: #ff4081;
+  text-shadow: 0 0 10px #ff80ab;
   margin-bottom: 1rem;
 }
 
 p {
   font-size: 1.2rem;
-  color: #333;
   margin-bottom: 2rem;
-  min-height: 70px;
+  min-height: 80px;
 }
 
 button {
-  background: #e91e63;
-  color: white;
+  background: linear-gradient(to right, #ff80ab, #f50057);
   border: none;
-  padding: 0.75rem 1.5rem;
+  padding: 0.8rem 2rem;
+  color: white;
   font-size: 1rem;
-  border-radius: 30px;
+  border-radius: 25px;
   cursor: pointer;
   transition: 0.3s ease;
+  box-shadow: 0 0 15px rgba(255, 64, 129, 0.5);
 }
 
 button:hover {
-  background: #d81b60;
-}
-
-.hearts {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: -1;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 64, 129, 0.7);
 }
 
 .hearts span {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Emoji_u2764.svg/2048px-Emoji_u2764.svg.png') no-repeat center;
   background-size: contain;
+  pointer-events: none;
   animation: float 8s linear infinite;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 @keyframes float {
@@ -93,4 +90,20 @@ button:hover {
     transform: translateY(-10vh) scale(1.2);
     opacity: 1;
   }
+}
+
+.cursor-heart {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Emoji_u2764.svg/2048px-Emoji_u2764.svg.png') no-repeat center;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 9999;
+  animation: fadeTrail 1s ease forwards;
+}
+
+@keyframes fadeTrail {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.5); }
 }
