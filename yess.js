@@ -1,53 +1,74 @@
-<script>
 const messages = [
-  "You make every moment feel like magic 💫",
-  "Your love is my greatest treasure ❤️",
-  "Every smile of yours lights up my world ✨",
-  "With you, everything feels just right 🌸",
-  "You're not just my girlfriend, you're my universe 🌍",
-  "Loving you is my favorite thing to do 💕"
+  "You're the sparkle in my stardust ✨",
+  "Every day with you feels like magic 💫",
+  "Your smile is my favorite view 🌅",
+  "If I had a flower for every thought of you… 🌸",
+  "You're not my number one, you're my only one ❤️",
+  "You make my world spin in color 🌈",
+  "You are art in motion 🎨",
+  "Falling for you was the best gravity ever 🌠"
 ];
 
-let i = 0;
-let typingInterval;
-const messageElement = document.getElementById("message");
+let messageIndex = 0;
+const msgElem = document.getElementById("message");
 
-function typeMessage(msg) {
-  clearInterval(typingInterval);
-  messageElement.textContent = "";
-  let index = 0;
-  typingInterval = setInterval(() => {
-    messageElement.textContent += msg.charAt(index);
-    index++;
-    if (index >= msg.length) clearInterval(typingInterval);
-  }, 50);
+function newMessage() {
+  msgElem.textContent = "";
+  const msg = messages[messageIndex % messages.length];
+  typewriter(msg);
+  messageIndex++;
 }
 
-function nextMessage() {
-  i = (i + 1) % messages.length;
-  typeMessage(messages[i]);
+function typewriter(text, i = 0) {
+  if (i < text.length) {
+    msgElem.textContent += text.charAt(i);
+    setTimeout(() => typewriter(text, i + 1), 50);
+  }
 }
 
-// Initial message animation
-typeMessage(messages[0]);
-
-// Floating hearts
-const heartContainer = document.querySelector('.hearts');
-for (let j = 0; j < 30; j++) {
-  const heart = document.createElement('span');
-  heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.animationDuration = 5 + Math.random() * 5 + 's';
-  heart.style.opacity = Math.random();
-  heartContainer.appendChild(heart);
+function openModal() {
+  document.getElementById("loveModal").style.display = "block";
 }
 
-// Custom cursor hearts trail
-document.addEventListener('mousemove', (e) => {
-  const trail = document.createElement('div');
-  trail.classList.add('cursor-heart');
-  trail.style.left = `${e.pageX}px`;
-  trail.style.top = `${e.pageY}px`;
-  document.body.appendChild(trail);
-  setTimeout(() => trail.remove(), 800);
-});
-</script>
+function closeModal() {
+  document.getElementById("loveModal").style.display = "none";
+}
+
+function celebrate() {
+  const confetti = document.getElementById('confetti');
+  const ctx = confetti.getContext('2d');
+  confetti.width = window.innerWidth;
+  confetti.height = window.innerHeight;
+
+  let pieces = [];
+
+  for (let i = 0; i < 150; i++) {
+    pieces.push({
+      x: Math.random() * confetti.width,
+      y: Math.random() * confetti.height,
+      size: Math.random() * 10 + 5,
+      speed: Math.random() * 3 + 2,
+      color: `hsl(${Math.random() * 360}, 100%, 70%)`
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, confetti.width, confetti.height);
+    for (let p of pieces) {
+      ctx.fillStyle = p.color;
+      ctx.fillRect(p.x, p.y, p.size, p.size);
+      p.y += p.speed;
+      if (p.y > confetti.height) p.y = 0;
+    }
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+
+  setTimeout(() => {
+    ctx.clearRect(0, 0, confetti.width, confetti.height);
+  }, 3000);
+}
+
+// Auto message on load
+newMessage();
