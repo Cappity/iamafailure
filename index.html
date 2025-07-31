@@ -4,15 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Girlfriend's Day 💖</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+  <div class="background"></div>
+
   <div class="card">
-    <h1>Happy Girlfriend's Day 💕</h1>
-    <p id="message">You make every day magical just by being you.</p>
-    <button onclick="nextMessage()">More Love</button>
+    <h1>Happy Girlfriend's Day 💖</h1>
+    <div class="heart">&#10084;</div>
+    <p id="message" class="typewriter"></p>
+    <div class="buttons">
+      <button onclick="newMessage()">💌 New Message</button>
+      <button onclick="openModal()">📜 Open Love Letter</button>
+      <button onclick="celebrate()">🎉 Celebrate</button>
+    </div>
   </div>
-  <div class="hearts"></div>
+
+  <div class="modal" id="loveModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>To the most beautiful soul 💕</h2>
+      <p>
+        Every second with you is magic. Your smile heals me, your presence inspires me, and your love completes me.  
+        Thank you for being the most incredible part of my life.  
+        Here's to forever with you. 💫
+      </p>
+    </div>
+  </div>
+
+  <canvas id="confetti"></canvas>
+
   <script src="script.js"></script>
 </body>
 </html>
